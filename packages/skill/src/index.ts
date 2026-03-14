@@ -14,3 +14,4 @@ export {
   formatExplainPrompt,
   type ExplainContext,
 } from "./explain-builder.js";
+export { buildOnboardingGuide } from "./onboard-builder.js";
