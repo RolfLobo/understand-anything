@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "sample-project",
+    "languages": ["typescript"],
+    "frameworks": ["express"],
+    "description": "A sample Express API",
+    "analyzedAt": "2026-03-14T00:00:00.000Z",
+    "gitCommitHash": "abc123"
+  },
+  "nodes": [
+    {"id": "file:src/index.ts", "type": "file", "name": "index.ts", "filePath": "src/index.ts", "summary": "Application entry point, starts the Express server", "tags": ["entry", "server"], "complexity": "simple"},
+    {"id": "file:src/auth/login.ts", "type": "file", "name": "login.ts", "filePath": "src/auth/login.ts", "summary": "Handles user authentication and login flow", "tags": ["auth", "login"], "complexity": "moderate"},
+    {"id": "func:src/auth/login.ts:handleLogin", "type": "function", "name": "handleLogin", "filePath": "src/auth/login.ts", "lineRange": [10, 35], "summary": "Validates credentials and returns a JWT token", "tags": ["auth", "jwt"], "complexity": "moderate"},
+    {"id": "func:src/auth/login.ts:validateEmail", "type": "function", "name": "validateEmail", "filePath": "src/auth/login.ts", "lineRange": [37, 42], "summary": "Checks if an email address is valid using regex", "tags": ["validation", "email"], "complexity": "simple"},
+    {"id": "file:src/db/connection.ts", "type": "file", "name": "connection.ts", "filePath": "src/db/connection.ts", "summary": "Database connection pool using PostgreSQL", "tags": ["database", "postgres"], "complexity": "moderate"}
+  ],
+  "edges": [
+    {"source": "file:src/index.ts", "target": "file:src/auth/login.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/auth/login.ts", "target": "func:src/auth/login.ts:handleLogin", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/auth/login.ts", "target": "func:src/auth/login.ts:validateEmail", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "func:src/auth/login.ts:handleLogin", "target": "func:src/auth/login.ts:validateEmail", "type": "calls", "direction": "forward", "description": "handleLogin calls validateEmail to check the email format", "weight": 0.8},
+    {"source": "file:src/auth/login.ts", "target": "file:src/db/connection.ts", "type": "imports", "direction": "forward", "weight": 0.7}
+  ],
+  "layers": [],
+  "tour": []
+}
