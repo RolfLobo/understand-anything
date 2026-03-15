@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/overview.png" alt="Understand Anything Dashboard" width="800" />
+  <img src="assets/hero.jpg" alt="Understand Anything — Turn any codebase into an interactive knowledge graph" width="800" />
 </p>
 
 ---
@@ -95,6 +95,10 @@ An interactive web dashboard opens with your codebase visualized as a graph — 
 ---
 
 ## ✨ Features
+
+<p align="center">
+  <img src="assets/overview.png" alt="Dashboard Screenshot" width="800" />
+</p>
 
 <table>
   <tr>
