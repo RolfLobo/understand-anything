@@ -46,7 +46,9 @@ describe("classifyUpdate", () => {
       cosmeticOnlyFiles: ["src/d.ts"],
     });
 
-    const decision = classifyUpdate(analysis, 50);
+    // src/ already exists in the project, so adding src/c.ts is not a directory change
+    const allKnownFiles = ["src/a.ts", "src/b.ts", "src/d.ts", "lib/util.ts"];
+    const decision = classifyUpdate(analysis, 50, allKnownFiles);
 
     expect(decision.action).toBe("PARTIAL_UPDATE");
     expect(decision.filesToReanalyze).toEqual(["src/a.ts", "src/b.ts", "src/c.ts"]);
@@ -73,7 +75,8 @@ describe("classifyUpdate", () => {
       newFiles: ["newdir/file.ts"],
     });
 
-    const decision = classifyUpdate(analysis, 50);
+    const allKnownFiles = ["src/existing.ts", "src/other.ts", "lib/util.ts"];
+    const decision = classifyUpdate(analysis, 50, allKnownFiles);
 
     expect(decision.action).toBe("ARCHITECTURE_UPDATE");
     expect(decision.rerunArchitecture).toBe(true);
@@ -85,7 +88,34 @@ describe("classifyUpdate", () => {
       deletedFiles: ["olddir/removed.ts"],
     });
 
-    const decision = classifyUpdate(analysis, 50);
+    const allKnownFiles = ["src/existing.ts", "src/other.ts"];
+    const decision = classifyUpdate(analysis, 50, allKnownFiles);
+
+    expect(decision.action).toBe("ARCHITECTURE_UPDATE");
+    expect(decision.rerunArchitecture).toBe(true);
+  });
+
+  it("does NOT trigger ARCHITECTURE_UPDATE for new file in existing directory", () => {
+    const analysis = makeAnalysis({
+      newFiles: ["src/newfile.ts"],
+    });
+
+    // src/ is already known via other files in the project
+    const allKnownFiles = ["src/a.ts", "src/b.ts", "lib/util.ts"];
+    const decision = classifyUpdate(analysis, 50, allKnownFiles);
+
+    expect(decision.action).toBe("PARTIAL_UPDATE");
+    expect(decision.rerunArchitecture).toBe(false);
+  });
+
+  it("triggers ARCHITECTURE_UPDATE for new file in genuinely new directory", () => {
+    const analysis = makeAnalysis({
+      newFiles: ["brand-new-pkg/index.ts"],
+    });
+
+    // allKnownFiles only contains src/ and lib/ — no brand-new-pkg/
+    const allKnownFiles = ["src/a.ts", "src/b.ts", "lib/util.ts"];
+    const decision = classifyUpdate(analysis, 50, allKnownFiles);
 
     expect(decision.action).toBe("ARCHITECTURE_UPDATE");
     expect(decision.rerunArchitecture).toBe(true);

@@ -64,7 +64,11 @@ export function saveFingerprints(projectRoot: string, store: FingerprintStore): 
 export function loadFingerprints(projectRoot: string): FingerprintStore | null {
   const filePath = join(projectRoot, UA_DIR, FINGERPRINT_FILE);
   if (!existsSync(filePath)) return null;
-  return JSON.parse(readFileSync(filePath, "utf-8")) as FingerprintStore;
+  try {
+    return JSON.parse(readFileSync(filePath, "utf-8")) as FingerprintStore;
+  } catch {
+    return null;
+  }
 }
 
 const DEFAULT_CONFIG: ProjectConfig = { autoUpdate: false };

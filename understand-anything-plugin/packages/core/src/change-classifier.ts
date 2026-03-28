@@ -21,6 +21,7 @@ export interface UpdateDecision {
 export function classifyUpdate(
   analysis: ChangeAnalysis,
   totalFilesInGraph: number,
+  allKnownFiles: string[] = [],
 ): UpdateDecision {
   const { newFiles, deletedFiles, structurallyChangedFiles, cosmeticOnlyFiles, unchangedFiles } = analysis;
   const structuralCount = structurallyChangedFiles.length + newFiles.length + deletedFiles.length;
@@ -53,7 +54,7 @@ export function classifyUpdate(
   }
 
   // Check if directory structure changed (new/deleted top-level directories)
-  const hasDirectoryChanges = detectDirectoryChanges(newFiles, deletedFiles, structurallyChangedFiles);
+  const hasDirectoryChanges = detectDirectoryChanges(newFiles, deletedFiles, allKnownFiles);
 
   if (hasDirectoryChanges || structuralCount > 10) {
     return {
@@ -79,15 +80,16 @@ export function classifyUpdate(
 
 /**
  * Detect if the changes affect the directory structure (new or removed directories).
- * Checks if any new/deleted files introduce or remove a top-level source directory.
+ * Uses all known files in the project as the baseline for existing directories,
+ * then checks if any new/deleted files introduce or remove a top-level source directory.
  */
 function detectDirectoryChanges(
   newFiles: string[],
   deletedFiles: string[],
-  structurallyChangedFiles: string[],
+  allKnownFiles: string[],
 ): boolean {
   const existingDirs = new Set(
-    structurallyChangedFiles.map((f) => topDirectory(f)).filter(Boolean),
+    allKnownFiles.map((f) => topDirectory(f)).filter(Boolean),
   );
 
   for (const f of newFiles) {

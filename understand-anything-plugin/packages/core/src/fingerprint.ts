@@ -35,6 +35,7 @@ export interface FileFingerprint {
   imports: ImportFingerprint[];
   exports: string[];
   totalLines: number;
+  hasStructuralAnalysis: boolean;
 }
 
 export interface FingerprintStore {
@@ -116,6 +117,7 @@ export function extractFileFingerprint(
     imports,
     exports,
     totalLines,
+    hasStructuralAnalysis: true,
   };
 }
 
@@ -135,6 +137,16 @@ export function compareFingerprints(
   // Fast path: identical content
   if (oldFp.contentHash === newFp.contentHash) {
     return { filePath: newFp.filePath, changeLevel: "NONE", details: [] };
+  }
+
+  // Conservative path: if either fingerprint lacks structural analysis,
+  // we cannot verify structure didn't change — classify as STRUCTURAL.
+  if (!oldFp.hasStructuralAnalysis || !newFp.hasStructuralAnalysis) {
+    return {
+      filePath: newFp.filePath,
+      changeLevel: "STRUCTURAL",
+      details: ["no structural analysis available — conservative classification"],
+    };
   }
 
   // Compare function signatures
@@ -194,10 +206,10 @@ export function compareFingerprints(
     const oldCls = oldFp.classes.find((c) => c.name === newCls.name);
     if (!oldCls) continue;
 
-    if (JSON.stringify(oldCls.methods.sort()) !== JSON.stringify(newCls.methods.sort())) {
+    if (JSON.stringify([...oldCls.methods].sort()) !== JSON.stringify([...newCls.methods].sort())) {
       details.push(`methods changed: ${newCls.name}`);
     }
-    if (JSON.stringify(oldCls.properties.sort()) !== JSON.stringify(newCls.properties.sort())) {
+    if (JSON.stringify([...oldCls.properties].sort()) !== JSON.stringify([...newCls.properties].sort())) {
       details.push(`properties changed: ${newCls.name}`);
     }
     if (oldCls.exported !== newCls.exported) {
@@ -206,8 +218,8 @@ export function compareFingerprints(
   }
 
   // Compare imports
-  const oldImports = oldFp.imports.map((i) => `${i.source}:${i.specifiers.sort().join(",")}`).sort();
-  const newImports = newFp.imports.map((i) => `${i.source}:${i.specifiers.sort().join(",")}`).sort();
+  const oldImports = oldFp.imports.map((i) => `${i.source}:${[...i.specifiers].sort().join(",")}`).sort();
+  const newImports = newFp.imports.map((i) => `${i.source}:${[...i.specifiers].sort().join(",")}`).sort();
 
   if (JSON.stringify(oldImports) !== JSON.stringify(newImports)) {
     details.push("imports changed");
@@ -265,6 +277,7 @@ export function buildFingerprintStore(
         imports: [],
         exports: [],
         totalLines: content.split("\n").length,
+        hasStructuralAnalysis: false,
       };
     }
   }
@@ -341,6 +354,7 @@ export function analyzeChanges(
         imports: [],
         exports: [],
         totalLines: content.split("\n").length,
+        hasStructuralAnalysis: false,
       };
     }
 

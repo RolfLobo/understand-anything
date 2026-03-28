@@ -136,6 +136,7 @@ describe("compareFingerprints", () => {
     imports: [{ source: "./utils", specifiers: ["format"] }],
     exports: ["main"],
     totalLines: 30,
+    hasStructuralAnalysis: true,
   };
 
   it("returns NONE when content hash is identical", () => {
@@ -242,6 +243,7 @@ describe("compareFingerprints", () => {
       ...baseFp,
       contentHash: "different",
       classes: [{ name: "MyClass", methods: ["init"], properties: [], exported: true, lineCount: 30 }],
+      hasStructuralAnalysis: true,
     };
     const result = compareFingerprints(baseFp, withClass);
     expect(result.changeLevel).toBe("STRUCTURAL");
@@ -252,15 +254,78 @@ describe("compareFingerprints", () => {
     const oldFp: FileFingerprint = {
       ...baseFp,
       classes: [{ name: "Foo", methods: ["a", "b"], properties: [], exported: true, lineCount: 30 }],
+      hasStructuralAnalysis: true,
     };
     const newFp: FileFingerprint = {
       ...baseFp,
       contentHash: "different",
       classes: [{ name: "Foo", methods: ["a", "c"], properties: [], exported: true, lineCount: 30 }],
+      hasStructuralAnalysis: true,
     };
     const result = compareFingerprints(oldFp, newFp);
     expect(result.changeLevel).toBe("STRUCTURAL");
     expect(result.details).toContain("methods changed: Foo");
+  });
+
+  it("does NOT mutate input arrays (sort must use spread-copy)", () => {
+    const oldFp: FileFingerprint = {
+      ...baseFp,
+      classes: [{ name: "Foo", methods: ["b", "a"], properties: ["y", "x"], exported: true, lineCount: 30 }],
+      imports: [{ source: "./utils", specifiers: ["z", "a"] }],
+      hasStructuralAnalysis: true,
+    };
+    const newFp: FileFingerprint = {
+      ...baseFp,
+      contentHash: "different",
+      classes: [{ name: "Foo", methods: ["b", "a"], properties: ["y", "x"], exported: true, lineCount: 30 }],
+      imports: [{ source: "./utils", specifiers: ["z", "a"] }],
+      hasStructuralAnalysis: true,
+    };
+
+    // Snapshot original order before comparison
+    const oldMethodsBefore = [...oldFp.classes[0].methods];
+    const oldPropertiesBefore = [...oldFp.classes[0].properties];
+    const oldSpecifiersBefore = [...oldFp.imports[0].specifiers];
+    const newMethodsBefore = [...newFp.classes[0].methods];
+    const newPropertiesBefore = [...newFp.classes[0].properties];
+    const newSpecifiersBefore = [...newFp.imports[0].specifiers];
+
+    compareFingerprints(oldFp, newFp);
+
+    // Arrays must remain in their original order (not sorted in-place)
+    expect(oldFp.classes[0].methods).toEqual(oldMethodsBefore);
+    expect(oldFp.classes[0].properties).toEqual(oldPropertiesBefore);
+    expect(oldFp.imports[0].specifiers).toEqual(oldSpecifiersBefore);
+    expect(newFp.classes[0].methods).toEqual(newMethodsBefore);
+    expect(newFp.classes[0].properties).toEqual(newPropertiesBefore);
+    expect(newFp.imports[0].specifiers).toEqual(newSpecifiersBefore);
+  });
+
+  it("classifies as STRUCTURAL when hasStructuralAnalysis is false (no tree-sitter)", () => {
+    const oldFp: FileFingerprint = {
+      filePath: "config.yaml",
+      contentHash: "hash_old",
+      functions: [],
+      classes: [],
+      imports: [],
+      exports: [],
+      totalLines: 10,
+      hasStructuralAnalysis: false,
+    };
+    const newFp: FileFingerprint = {
+      filePath: "config.yaml",
+      contentHash: "hash_new",
+      functions: [],
+      classes: [],
+      imports: [],
+      exports: [],
+      totalLines: 12,
+      hasStructuralAnalysis: false,
+    };
+
+    const result = compareFingerprints(oldFp, newFp);
+    expect(result.changeLevel).toBe("STRUCTURAL");
+    expect(result.details).toContain("no structural analysis available — conservative classification");
   });
 });
 
@@ -282,6 +347,7 @@ describe("analyzeChanges", () => {
         imports: [],
         exports: ["main"],
         totalLines: 30,
+        hasStructuralAnalysis: true,
       },
       "src/utils.ts": {
         filePath: "src/utils.ts",
@@ -291,6 +357,7 @@ describe("analyzeChanges", () => {
         imports: [],
         exports: [],
         totalLines: 10,
+        hasStructuralAnalysis: true,
       },
     },
   };
