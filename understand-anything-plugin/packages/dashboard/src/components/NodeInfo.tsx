@@ -29,7 +29,7 @@ const complexityBadgeColors: Record<string, string> = {
 };
 
 /**
- * Human-readable directional labels for all 26 edge types.
+ * Human-readable directional labels for all 29 edge types.
  * Must be kept in sync with core EdgeType.
  */
 const EDGE_LABELS: Record<EdgeType, { forward: string; backward: string }> = {
@@ -91,7 +91,7 @@ function DomainNodeDetails({ node, graph }: { node: GraphNode; graph: KnowledgeG
 
     return (
       <div className="space-y-3">
-        {meta?.entities && meta.entities.length > 0 ? (
+        {Array.isArray(meta?.entities) && meta.entities.length > 0 ? (
           <div>
             <h4 className="text-[10px] uppercase tracking-wider text-text-muted mb-1">Entities</h4>
             <div className="flex flex-wrap gap-1">
@@ -101,7 +101,7 @@ function DomainNodeDetails({ node, graph }: { node: GraphNode; graph: KnowledgeG
             </div>
           </div>
         ) : null}
-        {meta?.businessRules && meta.businessRules.length > 0 ? (
+        {Array.isArray(meta?.businessRules) && meta.businessRules.length > 0 ? (
           <div>
             <h4 className="text-[10px] uppercase tracking-wider text-text-muted mb-1">Business Rules</h4>
             <ul className="text-[11px] text-text-secondary space-y-1">
@@ -111,7 +111,7 @@ function DomainNodeDetails({ node, graph }: { node: GraphNode; graph: KnowledgeG
             </ul>
           </div>
         ) : null}
-        {meta?.crossDomainInteractions && meta.crossDomainInteractions.length > 0 ? (
+        {Array.isArray(meta?.crossDomainInteractions) && meta.crossDomainInteractions.length > 0 ? (
           <div>
             <h4 className="text-[10px] uppercase tracking-wider text-text-muted mb-1">Cross-Domain</h4>
             <ul className="text-[11px] text-text-secondary space-y-1">

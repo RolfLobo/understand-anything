@@ -72,16 +72,16 @@ export function normalizeNodeId(
   const { prefix, path } = stripToValidPrefix(trimmed);
 
   if (prefix) {
-    // For step nodes with filePath, reconstruct as step:filePath:stepSlug.
-    // This intentionally drops the flow slug (e.g. "create-order" in
-    // "step:create-order:validate") — the normalized form anchors to
-    // file paths instead of flow parentage, so the ID is stable across
-    // renames of the parent flow.
+    // For step nodes with filePath, reconstruct as step:flowSlug:filePath:stepSlug.
+    // Keeps the flow discriminator to avoid collisions when two flows
+    // have a same-named step in the same file.
     if (node.type === "step" && node.filePath) {
-      // Use the last colon-separated segment of the path as the step slug
-      const lastColon = path.lastIndexOf(":");
-      const stepSlug = lastColon >= 0 ? path.slice(lastColon + 1) : path;
-      return `${prefix}:${node.filePath}:${stepSlug}`;
+      const segments = path.split(":");
+      const stepSlug = segments.length > 0 ? segments[segments.length - 1] : path;
+      const flowSlug = segments.length > 1 ? segments[segments.length - 2] : "";
+      return flowSlug
+        ? `${prefix}:${flowSlug}:${node.filePath}:${stepSlug}`
+        : `${prefix}:${node.filePath}:${stepSlug}`;
     }
     return `${prefix}:${path}`;
   }
@@ -99,6 +99,7 @@ export function normalizeNodeId(
     // For step nodes with filePath, reconstruct as step:filePath:slug
     if (node.type === "step" && node.filePath) {
       const slug = path.toLowerCase().replace(/\s+/g, "-");
+      // No flow discriminator available from bare path — use filePath:slug
       return `${expectedPrefix}:${node.filePath}:${slug}`;
     }
     return `${expectedPrefix}:${path}`;

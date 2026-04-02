@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import {
   ReactFlow,
   ReactFlowProvider,
@@ -26,8 +26,8 @@ const nodeTypes = {
   "step-node": StepNode,
 };
 
-function getDomainMeta(node: GraphNode): Record<string, unknown> | undefined {
-  return (node as any).domainMeta;
+function getDomainMeta(node: GraphNode) {
+  return node.domainMeta;
 }
 
 function buildDomainOverview(graph: KnowledgeGraph): { nodes: Node[]; edges: Edge[] } {
@@ -156,7 +156,7 @@ function buildDomainDetail(
 function DomainGraphViewInner() {
   const domainGraph = useDashboardStore((s) => s.domainGraph);
   const activeDomainId = useDashboardStore((s) => s.activeDomainId);
-  const navigateToDomain = useDashboardStore((s) => s.navigateToDomain);
+  const clearActiveDomain = useDashboardStore((s) => s.clearActiveDomain);
 
   const { nodes, edges } = useMemo(() => {
     if (!domainGraph) return { nodes: [], edges: [] };
@@ -166,14 +166,7 @@ function DomainGraphViewInner() {
     return buildDomainOverview(domainGraph);
   }, [domainGraph, activeDomainId]);
 
-  const onNodeDoubleClick = useCallback(
-    (_: React.MouseEvent, node: Node) => {
-      if (node.type === "domain-cluster" && node.data && "domainId" in node.data) {
-        navigateToDomain(node.data.domainId as string);
-      }
-    },
-    [navigateToDomain],
-  );
+  // Double-click is handled by individual node components (e.g. DomainClusterNode)
 
   if (!domainGraph) {
     return (
@@ -189,9 +182,7 @@ function DomainGraphViewInner() {
         <div className="absolute top-3 left-3 z-10">
           <button
             type="button"
-            onClick={() => {
-              useDashboardStore.setState({ activeDomainId: null, selectedNodeId: null });
-            }}
+            onClick={() => clearActiveDomain()}
             className="px-3 py-1.5 text-xs rounded-lg bg-elevated border border-border-subtle text-text-secondary hover:text-text-primary transition-colors"
           >
             Back to domains
@@ -202,7 +193,6 @@ function DomainGraphViewInner() {
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
-        onNodeDoubleClick={onNodeDoubleClick}
         fitView
         fitViewOptions={{ padding: 0.2 }}
         minZoom={0.1}

@@ -110,8 +110,8 @@ describe("domain graph types", () => {
   it("normalizes domain type aliases", () => {
     const graph = structuredClone(domainGraph);
     (graph.nodes[0] as any).type = "business_domain";
-    (graph.nodes[1] as any).type = "workflow";
-    (graph.nodes[2] as any).type = "action";
+    (graph.nodes[1] as any).type = "business_flow";
+    (graph.nodes[2] as any).type = "business_step";
     const result = validateGraph(graph);
     expect(result.success).toBe(true);
     expect(result.data!.nodes[0].type).toBe("domain");

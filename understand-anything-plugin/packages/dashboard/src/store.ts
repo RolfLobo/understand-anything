@@ -43,7 +43,7 @@ const DEFAULT_FILTERS: FilterState = {
 };
 
 /** Categories used for node type filter toggles. Single source of truth for NodeCategory. */
-export type NodeCategory = "code" | "config" | "docs" | "infra" | "data";
+export type NodeCategory = "code" | "config" | "docs" | "infra" | "data" | "domain";
 
 /** Find which layer a node belongs to. Returns layerId or null. */
 function findNodeLayer(graph: KnowledgeGraph, nodeId: string): string | null {
@@ -139,6 +139,7 @@ interface DashboardStore {
   setDomainGraph: (graph: KnowledgeGraph) => void;
   setViewMode: (mode: ViewMode) => void;
   navigateToDomain: (domainId: string) => void;
+  clearActiveDomain: () => void;
 }
 
 function getSortedTour(graph: KnowledgeGraph): TourStep[] {
@@ -194,7 +195,7 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
   pathFinderOpen: false,
   reactFlowInstance: null,
 
-  nodeTypeFilters: { code: true, config: true, docs: true, infra: true, data: true },
+  nodeTypeFilters: { code: true, config: true, docs: true, infra: true, data: true, domain: true },
 
   toggleNodeTypeFilter: (category) =>
     set((state) => ({
@@ -218,7 +219,6 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
       focusNodeId: null,
       nodeHistory: [],
       viewMode: "structural" as const,
-      domainGraph: null,
       activeDomainId: null,
     });
   },
@@ -463,7 +463,7 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
   activeDomainId: null,
 
   setDomainGraph: (graph) => {
-    set({ domainGraph: graph, viewMode: "domain" });
+    set({ domainGraph: graph });
   },
 
   setViewMode: (mode) => {
@@ -479,6 +479,14 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
   navigateToDomain: (domainId) => {
     set({
       activeDomainId: domainId,
+      selectedNodeId: null,
+      focusNodeId: null,
+    });
+  },
+
+  clearActiveDomain: () => {
+    set({
+      activeDomainId: null,
       selectedNodeId: null,
       focusNodeId: null,
     });

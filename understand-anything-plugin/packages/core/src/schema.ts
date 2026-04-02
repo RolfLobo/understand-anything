@@ -52,9 +52,9 @@ export const NODE_TYPE_ALIASES: Record<string, string> = {
   // Domain aliases
   business_domain: "domain",
   process: "flow",
-  workflow: "flow",
-  action: "step",
+  business_flow: "flow",
   task: "step",
+  business_step: "step",
 };
 
 // Aliases that LLMs commonly generate instead of canonical edge types
@@ -317,6 +317,14 @@ export function autoFixGraph(data: Record<string, unknown>): {
   return { data: result, issues };
 }
 
+const DomainMetaSchema = z.object({
+  entities: z.array(z.string()).optional(),
+  businessRules: z.array(z.string()).optional(),
+  crossDomainInteractions: z.array(z.string()).optional(),
+  entryPoint: z.string().optional(),
+  entryType: z.enum(["http", "cli", "event", "cron", "manual"]).optional(),
+}).passthrough();
+
 export const GraphNodeSchema = z.object({
   id: z.string(),
   type: z.enum([
@@ -332,6 +340,7 @@ export const GraphNodeSchema = z.object({
   tags: z.array(z.string()),
   complexity: z.enum(["simple", "moderate", "complex"]),
   languageNotes: z.string().optional(),
+  domainMeta: DomainMetaSchema.optional(),
 }).passthrough();
 
 export const GraphEdgeSchema = z.object({

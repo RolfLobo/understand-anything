@@ -24,7 +24,7 @@ describe("normalizeNodeId — domain types", () => {
       name: "Validate",
       filePath: "src/validators/order.ts",
     });
-    expect(result).toBe("step:src/validators/order.ts:validate");
+    expect(result).toBe("step:create-order:src/validators/order.ts:validate");
   });
 
   it("normalizes step node IDs without filePath", () => {

@@ -24,16 +24,14 @@ Extracts business domain knowledge — domains, business flows, and process step
 
 ### Phase 2: Lightweight Scan (Path 1)
 
-1. Run the preprocessing script bundled with this skill:
-   ```
-   python understand-anything-plugin/skills/understand-domain/extract-domain-context.py <project-root>
-   ```
-   This outputs `.understand-anything/intermediate/domain-context.json` containing:
-   - File tree (respecting `.gitignore`)
-   - Detected entry points (HTTP routes, CLI commands, event handlers, cron jobs, exported handlers)
-   - File signatures (exports, imports per file)
-   - Code snippets for each entry point (signature + first few lines)
-2. Read the generated `domain-context.json` as context for Phase 4
+Perform a lightweight scan of the project to gather domain context:
+
+1. Use Glob and Grep tools to build a project context:
+   - Scan the file tree (respect `.gitignore` patterns)
+   - Detect entry points: HTTP routes, CLI commands, event handlers, cron jobs, exported handlers
+   - Read key files: package.json/Cargo.toml/go.mod for project metadata, README for business context
+   - Sample representative source files (routers, controllers, services, models) for domain terminology
+2. Assemble the context into a structured summary for Phase 4
 3. Proceed to Phase 4
 
 ### Phase 3: Derive from Existing Graph (Path 2)
