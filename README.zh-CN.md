@@ -32,29 +32,53 @@ Understand Anything 是一个基于 [Claude Code](https://docs.anthropic.com/en/
 
 ---
 
-## 🤔 为什么需要它？
+## ✨ 核心功能
 
-阅读代码已经很难，理解整个系统更难。文档往往过时，上手周期长达数周，新功能开发像考古。
+### 探索代码结构图
 
-Understand Anything 通过结合 **大语言模型（LLM）**与**静态代码分析**去生成一个**动态、可探索的代码知识地图** — 并提供自然语言解释。
+将你的代码库以交互式知识图谱的形式呈现——每个文件、函数和类都是可点击、可搜索、可探索的节点。选择任意节点即可查看通俗易懂的摘要、依赖关系和引导式学习路径。
 
----
+<p align="center">
+  <img src="assets/overview-structural.gif" alt="结构图——探索文件、函数、类及其关系" width="750" />
+</p>
 
-## 🎯 适用人群
+### 理解业务逻辑
+
+切换到领域视图，查看代码如何映射到真实的业务流程——以水平图的形式展示领域、流程和步骤。
+
+<p align="center">
+  <img src="assets/overview-domain.gif" alt="领域图——业务领域、流程和处理步骤" width="750" />
+</p>
 
 <table>
   <tr>
-    <td width="33%" valign="top">
-      <h3>👩‍💻 入门级开发者</h3>
-      <p>不再被陌生代码淹没。通过结构化引导逐步理解系统架构，每个函数和类都有简明易懂的解释。</p>
+    <td width="50%" valign="top">
+      <h3>🧭 引导式学习</h3>
+      <p>自动生成架构学习路径，按依赖顺序学习。</p>
     </td>
-    <td width="33%" valign="top">
-      <h3>📋 产品经理 & 设计师</h3>
-      <p>无需阅读代码，也能理解系统逻辑。比如直接提问：“认证流程是怎么实现的？” 便可获得基于实际代码库的清晰答案。</p>
+    <td width="50%" valign="top">
+      <h3>🔍 语义搜索</h3>
+      <p>支持模糊搜索 + 语义搜索，例如搜索"哪些部分处理身份验证？"即可在整个图中获取相关结果。</p>
     </td>
-    <td width="33%" valign="top">
-      <h3>🤖 AI协同开发者</h3>
-      <p>让你的 AI 工具深入了解你的项目。在代码审查之前使用<code>/understand-diff</code>，在深入任何模块时使用<code>/understand-explain</code>，或在架构分析中使用 <code>/understand-chat</code></p>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>📊 变更影响分析</h3>
+      <p>提交更改前，查看更改会影响系统的哪些部分。了解更改对整个代码库的连锁反应。</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>🎭 用户角色自适应 UI</h3>
+      <p>根据用户类型（初级开发 / 项目经理 / 高级用户）调整其详细程度。</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>🏗️ 层级可视化</h3>
+      <p>按架构层级自动分组 — API，服务，数据，UI, 系统工具 — 并附有颜色编码图例。</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>📚 语言概念</h3>
+      <p>12 种编程模式（泛型、闭包、装饰器等）将在上下文中逐一解释。</p>
     </td>
   </tr>
 </table>
@@ -189,67 +213,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Und
 
 ---
 
-## ✨ 核心功能
-
-<p align="center">
-  <img src="assets/overview.png" alt="Dashboard Screenshot" width="800" />
-</p>
-
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🗺️ 交互式知识图谱</h3>
-      <p>使用 React Flow 可视化文件、函数、类及其关系。点击任意节点即可查看其代码和连接。</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>💬 简明语言解释</h3>
-      <p>LLM 自动生成解释，让非技术人员也能理解代码。</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🧭 引导式学习</h3>
-      <p>自动生成架构学习路径，按依赖顺序学习。</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🔍 语义搜索</h3>
-      <p>支持模糊搜索 + 语义搜索，例如搜索“哪些部分处理身份验证？”即可在整个图中获取相关结果。</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>📊 变更影响分析</h3>
-      <p>提交更改前，查看更改会影响系统的哪些部分。了解更改对整个代码库的连锁反应。</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🎭 用户角色自适应 UI</h3>
-      <p>根据用户类型（初级开发 / 项目经理 / 高级用户）调整其详细程度。</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🏗️ 层级可视化</h3>
-      <p>按架构层级自动分组 — API，服务，数据，UI, 系统工具 — 并附有颜色编码图例。</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>📚 语言概念</h3>
-      <p>12 种编程模式（泛型、闭包、装饰器等）将在上下文中逐一解释。</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🏢 业务领域知识</h3>
-      <p>从代码库中提取业务领域、流程和处理步骤。通过交互式水平流程图查看业务逻辑如何映射到代码 — 领域包含流程，流程包含步骤。</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🔀 结构 + 领域双视图</h3>
-      <p>在数据看板中切换代码结构图和业务领域图。同时理解代码的组织方式和它实现的业务流程。</p>
-    </td>
-  </tr>
-</table>
-
----
-
 ## 🔧 技术原理
 
 ### 多智能体架构
@@ -266,35 +229,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Und
 | `domain-analyzer` | 提取业务领域、流程和处理步骤（由 `/understand-domain` 使用） |
 
 文件分析器并行运行（最多 3 个并发）。支持增量更新 — 仅重新分析自上次运行以来发生更改的文件。
-
-### 项目结构
-
-```
-understand-anything-plugin/
-  .claude-plugin/  — 插件清单
-  agents/          — 专业 AI 智能体
-  skills/          — Skill 定义 (/understand, /understand-chat, etc.)
-  src/             — TypeScript 源代码 (context-builder, diff-analyzer, etc.)
-  packages/
-    core/          — 分析引擎 (types, persistence, tree-sitter, search, schema, tours)
-    dashboard/     — React + TypeScript 网页数据看板
-```
-
-### 技术栈
-
-TypeScript, pnpm workspaces, React 18, Vite, TailwindCSS v4, React Flow, Zustand, web-tree-sitter, Fuse.js, Zod, Dagre
-
-### 开发命令
-
-| 命令 | 描述 |
-|---------|-------------|
-| `pnpm install` | 安装所有依赖项 |
-| `pnpm --filter @understand-anything/core build` | 构建核心包 |
-| `pnpm --filter @understand-anything/core test` | 运行核心测试 |
-| `pnpm --filter @understand-anything/skill build` | 构建插件包 |
-| `pnpm --filter @understand-anything/skill test` | 运行插件测试 |
-| `pnpm --filter @understand-anything/dashboard build` | 构建数据看板 |
-| `pnpm dev:dashboard` | 启动数据看板开发服务器 |
 
 ---
 

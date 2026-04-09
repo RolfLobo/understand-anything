@@ -33,29 +33,53 @@ Understand Anything は [Claude Code](https://docs.anthropic.com/en/docs/claude-
 
 ---
 
-## 🤔 なぜ必要なのか？
+## ✨ 機能
 
-コードを読むのは大変です。コードベース全体を理解するのはさらに大変です。ドキュメントは常に古く、オンボーディングには数週間かかり、新機能の開発はまるで考古学のようです。
+### コード構造グラフを探索
 
-Understand Anything は、**LLMの知能**と**静的解析**を組み合わせることでこの問題を解決します。プロジェクトの生きた探索可能なマップを生成し、すべてに平易な日本語の説明が付きます。
+コードベースをインタラクティブなナレッジグラフとして表示——すべてのファイル、関数、クラスがクリック・検索・探索可能なノードです。ノードを選択すると、わかりやすい要約、依存関係、ガイド付きツアーが表示されます。
 
----
+<p align="center">
+  <img src="assets/overview-structural.gif" alt="構造グラフ——ファイル、関数、クラスとその関係を探索" width="750" />
+</p>
 
-## 🎯 誰のためのツール？
+### ビジネスロジックを理解
+
+ドメインビューに切り替えると、コードが実際のビジネスプロセスにどう対応するかが一目でわかります——ドメイン、フロー、ステップが横方向のグラフとして表示されます。
+
+<p align="center">
+  <img src="assets/overview-domain.gif" alt="ドメイングラフ——ビジネスドメイン、フロー、プロセスステップ" width="750" />
+</p>
 
 <table>
   <tr>
-    <td width="33%" valign="top">
-      <h3>👩‍💻 ジュニア開発者</h3>
-      <p>不慣れなコードに溺れるのはもう終わり。アーキテクチャをステップバイステップで案内するガイドツアーで、すべての関数やクラスが平易な言葉で説明されます。</p>
+    <td width="50%" valign="top">
+      <h3>🧭 ガイドツアー</h3>
+      <p>依存関係順に並べられた、自動生成のアーキテクチャウォークスルー。正しい順序でコードベースを学べます。</p>
     </td>
-    <td width="33%" valign="top">
-      <h3>📋 プロダクトマネージャー＆デザイナー</h3>
-      <p>コードを読まなくても、システムが実際にどう動くかを理解できます。「認証はどう動いているの？」のような質問をすれば、実際のコードベースに基づいた明確な回答が得られます。</p>
+    <td width="50%" valign="top">
+      <h3>🔍 ファジー＆セマンティック検索</h3>
+      <p>名前や意味で何でも検索できます。「認証を処理する部分は？」と検索すれば、グラフ全体から関連する結果が得られます。</p>
     </td>
-    <td width="33%" valign="top">
-      <h3>🤖 AI活用開発者</h3>
-      <p>AIツールにプロジェクトの深いコンテキストを与えましょう。コードレビュー前に <code>/understand-diff</code>、モジュールの詳細調査に <code>/understand-explain</code>、アーキテクチャの推論に <code>/understand-chat</code> を使えます。</p>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>📊 差分影響分析</h3>
+      <p>コミット前に、変更がシステムのどの部分に影響するかを確認。コードベース全体への波及効果を把握できます。</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>🎭 ペルソナ適応型UI</h3>
+      <p>ダッシュボードは、ジュニア開発者・PM・パワーユーザーなど、ユーザーに応じて詳細レベルを調整します。</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>🏗️ レイヤー可視化</h3>
+      <p>API・Service・Data・UI・Utilityなどのアーキテクチャ層ごとに自動グループ化。色分けされた凡例付き。</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>📚 言語コンセプト</h3>
+      <p>ジェネリクス・クロージャ・デコレータなど12のプログラミングパターンが、出現箇所のコンテキストで説明されます。</p>
     </td>
   </tr>
 </table>
@@ -190,67 +214,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Und
 
 ---
 
-## ✨ 機能
-
-<p align="center">
-  <img src="assets/overview.png" alt="ダッシュボードスクリーンショット" width="800" />
-</p>
-
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🗺️ インタラクティブナレッジグラフ</h3>
-      <p>ファイル・関数・クラスとそれらの関係をReact Flowで可視化。ノードをクリックするとコードと接続関係が表示されます。</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>💬 平易な言葉での説明</h3>
-      <p>すべてのノードがLLMによって説明されるため、技術者でなくても、それが何をしているのか、なぜ存在するのかを理解できます。</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🧭 ガイドツアー</h3>
-      <p>依存関係順に並べられた、自動生成のアーキテクチャウォークスルー。正しい順序でコードベースを学べます。</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🔍 ファジー＆セマンティック検索</h3>
-      <p>名前や意味で何でも検索できます。「認証を処理する部分は？」と検索すれば、グラフ全体から関連する結果が得られます。</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>📊 差分影響分析</h3>
-      <p>コミット前に、変更がシステムのどの部分に影響するかを確認。コードベース全体への波及効果を把握できます。</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🎭 ペルソナ適応型UI</h3>
-      <p>ダッシュボードは、ジュニア開発者・PM・パワーユーザーなど、ユーザーに応じて詳細レベルを調整します。</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🏗️ レイヤー可視化</h3>
-      <p>API・Service・Data・UI・Utilityなどのアーキテクチャ層ごとに自動グループ化。色分けされた凡例付き。</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>📚 言語コンセプト</h3>
-      <p>ジェネリクス・クロージャ・デコレータなど12のプログラミングパターンが、出現箇所のコンテキストで説明されます。</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🏢 ビジネスドメイン知識</h3>
-      <p>コードベースからビジネスドメイン、フロー、処理ステップを抽出。インタラクティブな水平フローグラフでビジネスロジックがコードにどうマッピングされるかを確認 — ドメインにはフロー、フローにはステップが含まれます。</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🔀 構造 + ドメインビュー</h3>
-      <p>ダッシュボードでコード構造グラフとビジネスドメイングラフを切り替え。コードの組織方法と、それが実装するビジネスプロセスの両方を理解できます。</p>
-    </td>
-  </tr>
-</table>
-
----
-
 ## 🔧 内部の仕組み
 
 ### マルチエージェントパイプライン
@@ -267,35 +230,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Und
 | `domain-analyzer` | ビジネスドメイン、フロー、処理ステップの抽出（`/understand-domain` で使用） |
 
 ファイルアナライザーは並列実行されます（最大3つ同時）。インクリメンタル更新に対応しており、前回の実行から変更されたファイルのみを再分析します。
-
-### プロジェクト構成
-
-```
-understand-anything-plugin/
-  .claude-plugin/  — プラグインマニフェスト
-  agents/          — 専門AIエージェント
-  skills/          — スキル定義（/understand、/understand-chatなど）
-  src/             — TypeScriptソース（context-builder、diff-analyzerなど）
-  packages/
-    core/          — 分析エンジン（types、persistence、tree-sitter、search、schema、tours）
-    dashboard/     — React + TypeScript Webダッシュボード
-```
-
-### 技術スタック
-
-TypeScript、pnpm workspaces、React 18、Vite、TailwindCSS v4、React Flow、Zustand、web-tree-sitter、Fuse.js、Zod、Dagre
-
-### 開発コマンド
-
-| コマンド | 説明 |
-|---------|-------------|
-| `pnpm install` | すべての依存関係をインストール |
-| `pnpm --filter @understand-anything/core build` | coreパッケージをビルド |
-| `pnpm --filter @understand-anything/core test` | coreテストを実行 |
-| `pnpm --filter @understand-anything/skill build` | プラグインパッケージをビルド |
-| `pnpm --filter @understand-anything/skill test` | プラグインテストを実行 |
-| `pnpm --filter @understand-anything/dashboard build` | ダッシュボードをビルド |
-| `pnpm dev:dashboard` | ダッシュボード開発サーバーを起動 |
 
 ---
 

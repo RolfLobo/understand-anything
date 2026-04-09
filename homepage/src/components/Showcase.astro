@@ -1,17 +1,61 @@
+---
+const structuralVideoUrl = import.meta.env.VITE_STRUCTURAL_VIDEO_URL;
+const domainVideoUrl = import.meta.env.VITE_DOMAIN_VIDEO_URL;
+---
+
 <section class="showcase">
-  <p class="showcase-label reveal">See your codebase come alive</p>
+  <p class="showcase-label reveal">Explore the structural graph</p>
+  <p class="showcase-desc reveal">Navigate your codebase as an interactive knowledge graph — click, search, and explore every file, function, and class.</p>
   <div class="showcase-frame reveal reveal-delay-1">
     <div class="showcase-titlebar">
       <span class="dot red"></span>
       <span class="dot yellow"></span>
       <span class="dot green"></span>
     </div>
-    <img
-      src="/Understand-Anything/images/overview.png"
-      alt="Understand Anything dashboard showing an interactive knowledge graph of a codebase"
-      class="showcase-img"
-      loading="lazy"
-    />
+    {structuralVideoUrl ? (
+      <video
+        src={structuralVideoUrl}
+        autoplay
+        loop
+        muted
+        playsinline
+        class="showcase-img"
+      />
+    ) : (
+      <img
+        src="/Understand-Anything/images/overview-structural.gif"
+        alt="Structural graph — explore files, functions, classes and their relationships"
+        class="showcase-img"
+        loading="lazy"
+      />
+    )}
+  </div>
+
+  <p class="showcase-label reveal" style="margin-top: 4rem;">Understand business logic</p>
+  <p class="showcase-desc reveal">Switch to the domain view and see how your code maps to real business processes.</p>
+  <div class="showcase-frame reveal reveal-delay-1">
+    <div class="showcase-titlebar">
+      <span class="dot red"></span>
+      <span class="dot yellow"></span>
+      <span class="dot green"></span>
+    </div>
+    {domainVideoUrl ? (
+      <video
+        src={domainVideoUrl}
+        autoplay
+        loop
+        muted
+        playsinline
+        class="showcase-img"
+      />
+    ) : (
+      <img
+        src="/Understand-Anything/images/overview-domain.gif"
+        alt="Domain graph — business domains, flows, and process steps"
+        class="showcase-img"
+        loading="lazy"
+      />
+    )}
   </div>
 </section>
 
@@ -28,6 +72,14 @@
     font-size: clamp(1.25rem, 3vw, 1.75rem);
     color: var(--text-muted);
     margin-bottom: 2.5rem;
+  }
+
+  .showcase-desc {
+    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
   }
 
   .showcase-frame {

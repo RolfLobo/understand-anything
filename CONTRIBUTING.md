@@ -172,6 +172,10 @@ pnpm --filter @understand-anything/core test --watch
 - Use Zustand for state management
 - Follow the existing component structure
 
+### Tech Stack
+
+TypeScript, pnpm workspaces, React 18, Vite, TailwindCSS v4, React Flow, Zustand, web-tree-sitter, Fuse.js, Zod, Dagre
+
 ### File Organization
 
 ```

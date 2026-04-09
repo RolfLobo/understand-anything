@@ -32,29 +32,53 @@ Understand Anything 是一個基於 [Claude Code](https://docs.anthropic.com/en/
 
 ---
 
-## 🤔 為什麼需要它？
+## ✨ 核心功能
 
-閱讀程式碼已經很難，理解整個系統更難。文件往往過時，上手週期長達數週，新功能開發像考古。
+### 探索程式碼結構圖
 
-Understand Anything 透過結合**大型語言模型（LLM）**與**靜態程式碼分析**去產生一個**動態、可探索的程式碼知識地圖** — 並提供自然語言解釋。
+將你的程式碼庫以互動式知識圖譜呈現——每個檔案、函式和類別都是可點擊、可搜尋、可探索的節點。選取任意節點即可檢視淺顯易懂的摘要、依賴關係和引導式學習路徑。
 
----
+<p align="center">
+  <img src="assets/overview-structural.gif" alt="結構圖——探索檔案、函式、類別及其關係" width="750" />
+</p>
 
-## 🎯 適用對象
+### 理解業務邏輯
+
+切換到領域視圖，查看程式碼如何對應到真實的業務流程——以水平圖的形式展示領域、流程和步驟。
+
+<p align="center">
+  <img src="assets/overview-domain.gif" alt="領域圖——業務領域、流程和處理步驟" width="750" />
+</p>
 
 <table>
   <tr>
-    <td width="33%" valign="top">
-      <h3>👩‍💻 入門級開發者</h3>
-      <p>不再被陌生程式碼淹沒。透過結構化引導逐步理解系統架構，每個函式和類別都有簡明易懂的解釋。</p>
+    <td width="50%" valign="top">
+      <h3>🧭 引導式學習</h3>
+      <p>自動產生架構學習路徑，按相依順序學習。</p>
     </td>
-    <td width="33%" valign="top">
-      <h3>📋 產品經理 & 設計師</h3>
-      <p>無需閱讀程式碼，也能理解系統邏輯。比如直接提問：「認證流程是怎麼實作的？」便可獲得基於實際程式碼庫的清晰答案。</p>
+    <td width="50%" valign="top">
+      <h3>🔍 語意搜尋</h3>
+      <p>支援模糊搜尋 + 語意搜尋，例如搜尋「哪些部分處理身分驗證？」即可在整個圖中獲取相關結果。</p>
     </td>
-    <td width="33%" valign="top">
-      <h3>🤖 AI 協同開發者</h3>
-      <p>讓你的 AI 工具深入了解你的專案。在程式碼審查之前使用 <code>/understand-diff</code>，在深入任何模組時使用 <code>/understand-explain</code>，或在架構分析中使用 <code>/understand-chat</code></p>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>📊 變更影響分析</h3>
+      <p>提交變更前，查看變更會影響系統的哪些部分。了解變更對整個程式碼庫的連鎖反應。</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>🎭 使用者角色自適應 UI</h3>
+      <p>根據使用者類型（初級開發 / 專案經理 / 進階使用者）調整其詳細程度。</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>🏗️ 層級視覺化</h3>
+      <p>按架構層級自動分組 — API、服務、資料、UI、系統工具 — 並附有顏色編碼圖例。</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>📚 語言概念</h3>
+      <p>12 種程式設計模式（泛型、閉包、裝飾器等）將在上下文中逐一解釋。</p>
     </td>
   </tr>
 </table>
@@ -189,67 +213,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Und
 
 ---
 
-## ✨ 核心功能
-
-<p align="center">
-  <img src="assets/overview.png" alt="Dashboard Screenshot" width="800" />
-</p>
-
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🗺️ 互動式知識圖譜</h3>
-      <p>使用 React Flow 視覺化檔案、函式、類別及其關係。點擊任意節點即可查看其程式碼和連接。</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>💬 簡明語言解釋</h3>
-      <p>LLM 自動產生解釋，讓非技術人員也能理解程式碼。</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🧭 引導式學習</h3>
-      <p>自動產生架構學習路徑，按相依順序學習。</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🔍 語意搜尋</h3>
-      <p>支援模糊搜尋 + 語意搜尋，例如搜尋「哪些部分處理身分驗證？」即可在整個圖中獲取相關結果。</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>📊 變更影響分析</h3>
-      <p>提交變更前，查看變更會影響系統的哪些部分。了解變更對整個程式碼庫的連鎖反應。</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🎭 使用者角色自適應 UI</h3>
-      <p>根據使用者類型（初級開發 / 專案經理 / 進階使用者）調整其詳細程度。</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🏗️ 層級視覺化</h3>
-      <p>按架構層級自動分組 — API、服務、資料、UI、系統工具 — 並附有顏色編碼圖例。</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>📚 語言概念</h3>
-      <p>12 種程式設計模式（泛型、閉包、裝飾器等）將在上下文中逐一解釋。</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🏢 業務領域知識</h3>
-      <p>從程式碼庫中提取業務領域、流程和處理步驟。透過互動式水平流程圖查看業務邏輯如何對應到程式碼 — 領域包含流程，流程包含步驟。</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🔀 結構 + 領域雙視圖</h3>
-      <p>在資料看板中切換程式碼結構圖和業務領域圖。同時理解程式碼的組織方式和它實現的業務流程。</p>
-    </td>
-  </tr>
-</table>
-
----
-
 ## 🔧 技術原理
 
 ### 多智能體架構
@@ -266,35 +229,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Und
 | `domain-analyzer` | 提取業務領域、流程和處理步驟（由 `/understand-domain` 使用） |
 
 檔案分析器並行執行（最多 3 個並發）。支援增量更新 — 僅重新分析自上次執行以來發生變更的檔案。
-
-### 專案結構
-
-```
-understand-anything-plugin/
-  .claude-plugin/  — 外掛程式清單
-  agents/          — 專業 AI 智能體
-  skills/          — Skill 定義 (/understand, /understand-chat, etc.)
-  src/             — TypeScript 原始碼 (context-builder, diff-analyzer, etc.)
-  packages/
-    core/          — 分析引擎 (types, persistence, tree-sitter, search, schema, tours)
-    dashboard/     — React + TypeScript 網頁資料看板
-```
-
-### 技術堆疊
-
-TypeScript、pnpm workspaces、React 18、Vite、TailwindCSS v4、React Flow、Zustand、web-tree-sitter、Fuse.js、Zod、Dagre
-
-### 開發指令
-
-| 指令 | 說明 |
-|---------|-------------|
-| `pnpm install` | 安裝所有相依套件 |
-| `pnpm --filter @understand-anything/core build` | 建置核心套件 |
-| `pnpm --filter @understand-anything/core test` | 執行核心測試 |
-| `pnpm --filter @understand-anything/skill build` | 建置外掛程式套件 |
-| `pnpm --filter @understand-anything/skill test` | 執行外掛程式測試 |
-| `pnpm --filter @understand-anything/dashboard build` | 建置資料看板 |
-| `pnpm dev:dashboard` | 啟動資料看板開發伺服器 |
 
 ---
 

@@ -33,29 +33,53 @@ Understand Anything, projenizi çok-ajan hattıyla analiz eden, her dosya, fonks
 
 ---
 
-## 🤔 Neden?
+## ✨ Özellikler
 
-Kod okumak zor. Bütün bir kod tabanını anlamak daha da zor. Dokümantasyon her zaman güncel değil, işe alıştırma haftalar alıyor ve her yeni özellik arkeoloji gibi hissettiriyor.
+### Yapısal grafiği keşfedin
 
-Understand Anything bunu **LLM zekası** ile **statik analizi** birleştirerek çözüyor ve projenin canlı, keşfedilebilir bir haritasını üretiyor — her şey için sade Türkçe açıklamalarla.
+Kod tabanınızı interaktif bir bilgi grafiği olarak görüntüleyin — her dosya, fonksiyon ve sınıf tıklanabilir, aranabilir ve keşfedilebilir bir düğümdür. Herhangi bir düğümü seçerek anlaşılır özetleri, bağımlılıkları ve rehberli turları görün.
 
----
+<p align="center">
+  <img src="assets/overview-structural.gif" alt="Yapısal grafik — dosyaları, fonksiyonları, sınıfları ve ilişkilerini keşfedin" width="750" />
+</p>
 
-## 🎯 Kimler için?
+### İş mantığını anlayın
+
+Alan görünümüne geçin ve kodunuzun gerçek iş süreçleriyle nasıl eşleştiğini görün — alanlar, akışlar ve adımlar yatay bir grafik olarak sunulur.
+
+<p align="center">
+  <img src="assets/overview-domain.gif" alt="Alan grafiği — iş alanları, akışlar ve süreç adımları" width="750" />
+</p>
 
 <table>
   <tr>
-    <td width="33%" valign="top">
-      <h3>👩‍💻 Junior Geliştiriciler</h3>
-      <p>Tanımadığın kodda boğulmayı bırak. Her fonksiyon ve sınıfın sade Türkçe açıklandığı, mimariyi adım adım anlatan rehberli turlar al.</p>
+    <td width="50%" valign="top">
+      <h3>🧭 Rehberli Turlar</h3>
+      <p>Bağımlılığa göre sıralanmış, mimarinin otomatik oluşturulmuş gözden geçirmeleri. Kod tabanını doğru sırayla öğren.</p>
     </td>
-    <td width="33%" valign="top">
-      <h3>📋 Ürün Yöneticileri ve Tasarımcılar</h3>
-      <p>Kod okumadan sistemin gerçekte nasıl çalıştığını nihayet anla. "Kimlik doğrulama nasıl çalışır?" gibi sorular sor ve gerçek kod tabanına dayalı net cevaplar al.</p>
+    <td width="50%" valign="top">
+      <h3>🔍 Bulanık ve Anlamsal Arama</h3>
+      <p>İsme veya anlamına göre her şeyi bul. "Kimlik doğrulamayı hangi parçalar yönetiyor?" ara ve grafik boyunca ilgili sonuçları al.</p>
     </td>
-    <td width="33%" valign="top">
-      <h3>🤖 AI Destekli Geliştiriciler</h3>
-      <p>AI araçlarına projen hakkında derin bağlam ver. Kod incelemeden önce <code>/understand-diff</code>, herhangi bir modüle dalmak için <code>/understand-explain</code> veya mimari hakkında akıl yürütmek için <code>/understand-chat</code> kullan.</p>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>📊 Diff Etki Analizi</h3>
+      <p>Değişikliklerinin sistemin hangi bölümlerini etkilediğini commit etmeden önce gör. Kod tabanı boyunca dalgalanma etkilerini anla.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>🎭 Kişiye Uyarlanabilir UI</h3>
+      <p>Kontrol paneli, kim olduğuna göre ayrıntı seviyesini ayarlar — junior geliştirici, ürün yöneticisi veya güçlü kullanıcı.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>🏗️ Katman Görselleştirmesi</h3>
+      <p>Mimari katmana göre otomatik gruplama — API, Servis, Veri, UI, Yardımcı — renk kodlu efsaneyle.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>📚 Dil Kavramları</h3>
+      <p>12 programlama deseni (generikler, kapanışlar, dekoratörler, vb.) göründükleri her yerde bağlam içinde açıklanır.</p>
     </td>
   </tr>
 </table>
@@ -190,67 +214,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Und
 
 ---
 
-## ✨ Özellikler
-
-<p align="center">
-  <img src="assets/overview.png" alt="Kontrol Paneli Ekran Görüntüsü" width="800" />
-</p>
-
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🗺️ İnteraktif Bilgi Grafiği</h3>
-      <p>Dosyalar, fonksiyonlar, sınıflar ve ilişkileri React Flow ile görselleştirildi. Kodunu ve bağlantılarını görmek için herhangi bir düğüme tıkla.</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>💬 Sade Türkçe Özetler</h3>
-      <p>Her düğüm bir LLM tarafından açıklanır, böylece herkes — teknik olsun ya da olmasın — ne yaptığını ve neden var olduğunu anlayabilir.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🧭 Rehberli Turlar</h3>
-      <p>Bağımlılığa göre sıralanmış, mimarinin otomatik oluşturulmuş gözden geçirmeleri. Kod tabanını doğru sırayla öğren.</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🔍 Bulanık ve Anlamsal Arama</h3>
-      <p>İsme veya anlamına göre her şeyi bul. "Kimlik doğrulamayı hangi parçalar yönetiyor?" ara ve grafik boyunca ilgili sonuçları al.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>📊 Diff Etki Analizi</h3>
-      <p>Değişikliklerinin sistemin hangi bölümlerini etkilediğini commit etmeden önce gör. Kod tabanı boyunca dalgalanma etkilerini anla.</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🎭 Kişiye Uyarlanabilir UI</h3>
-      <p>Kontrol paneli, kim olduğuna göre ayrıntı seviyesini ayarlar — junior geliştirici, ürün yöneticisi veya güçlü kullanıcı.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🏗️ Katman Görselleştirmesi</h3>
-      <p>Mimari katmana göre otomatik gruplama — API, Servis, Veri, UI, Yardımcı — renk kodlu efsaneyle.</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>📚 Dil Kavramları</h3>
-      <p>12 programlama deseni (generikler, kapanışlar, dekoratörler, vb.) göründükleri her yerde bağlam içinde açıklanır.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🏢 İş Alanı Bilgisi</h3>
-      <p>Kod tabanından iş alanları, akışlar ve işlem adımları çıkar. Etkileşimli yatay akış grafiğiyle iş mantığının koda nasıl eşlendiğini gör — alanlar akışları, akışlar adımları içerir.</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🔀 Yapısal + Alan Görünümleri</h3>
-      <p>Kontrol panelinde yapısal kod grafiği ile iş alanı grafiği arasında geçiş yap. Hem kodun nasıl organize edildiğini hem de hangi iş süreçlerini uyguladığını anla.</p>
-    </td>
-  </tr>
-</table>
-
----
-
 ## 🔧 Kaputun Altında
 
 ### Çok-Ajan Hattı
@@ -267,35 +230,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Und
 | `domain-analyzer` | İş alanları, akışlar ve işlem adımlarını çıkar (`/understand-domain` tarafından kullanılır) |
 
 Dosya analizörleri paralel çalışır (en fazla 3 eşzamanlı). Artımlı güncellemeleri destekler — yalnızca son çalıştırmadan bu yana değişen dosyaları yeniden analiz eder.
-
-### Proje Yapısı
-
-```
-understand-anything-plugin/
-  .claude-plugin/  — Eklenti manifestosu
-  agents/          — Özel AI ajanları
-  skills/          — Yetenek tanımları (/understand, /understand-chat, vb.)
-  src/             — TypeScript kaynağı (context-builder, diff-analyzer, vb.)
-  packages/
-    core/          — Analiz motoru (tipler, kalıcılık, tree-sitter, arama, şema, turlar)
-    dashboard/     — React + TypeScript web kontrol paneli
-```
-
-### Teknoloji Yığını
-
-TypeScript, pnpm workspaces, React 18, Vite, TailwindCSS v4, React Flow, Zustand, web-tree-sitter, Fuse.js, Zod, Dagre
-
-### Geliştirme Komutları
-
-| Komut | Açıklama |
-|---------|-------------|
-| `pnpm install` | Tüm bağımlılıkları yükle |
-| `pnpm --filter @understand-anything/core build` | Core paketini derle |
-| `pnpm --filter @understand-anything/core test` | Core testlerini çalıştır |
-| `pnpm --filter @understand-anything/skill build` | Eklenti paketini derle |
-| `pnpm --filter @understand-anything/skill test` | Eklenti testlerini çalıştır |
-| `pnpm --filter @understand-anything/dashboard build` | Kontrol panelini derle |
-| `pnpm dev:dashboard` | Kontrol paneli geliştirme sunucusunu başlat |
 
 ---
 

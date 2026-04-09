@@ -33,29 +33,53 @@ Understand Anything is a [Claude Code](https://docs.anthropic.com/en/docs/claude
 
 ---
 
-## 🤔 Why?
+## ✨ Features
 
-Reading code is hard. Understanding a whole codebase is harder. Documentation is always out of date, onboarding takes weeks, and every new feature feels like archaeology.
+### Explore the structural graph
 
-Understand Anything fixes this by combining **LLM intelligence** with **static analysis** to produce a living, explorable map of your project — with plain-English explanations for everything.
+Navigate your codebase as an interactive knowledge graph — every file, function, and class is a node you can click, search, and explore. Select any node to see plain-English summaries, relationships, and guided tours.
 
----
+<p align="center">
+  <img src="assets/overview-structural.gif" alt="Structural graph — explore files, functions, classes and their relationships" width="750" />
+</p>
 
-## 🎯 Who is this for?
+### Understand business logic
+
+Switch to the domain view and see how your code maps to real business processes — domains, flows, and steps laid out as a horizontal graph.
+
+<p align="center">
+  <img src="assets/overview-domain.gif" alt="Domain graph — business domains, flows, and process steps" width="750" />
+</p>
 
 <table>
   <tr>
-    <td width="33%" valign="top">
-      <h3>👩‍💻 Junior Developers</h3>
-      <p>Stop drowning in unfamiliar code. Get guided tours that walk you through the architecture step by step, with every function and class explained in plain English.</p>
+    <td width="50%" valign="top">
+      <h3>🧭 Guided Tours</h3>
+      <p>Auto-generated walkthroughs of the architecture, ordered by dependency. Learn the codebase in the right order.</p>
     </td>
-    <td width="33%" valign="top">
-      <h3>📋 Product Managers & Designers</h3>
-      <p>Finally understand how the system actually works without reading code. Ask questions like "how does authentication work?" and get clear answers grounded in the real codebase.</p>
+    <td width="50%" valign="top">
+      <h3>🔍 Fuzzy & Semantic Search</h3>
+      <p>Find anything by name or by meaning. Search "which parts handle auth?" and get relevant results across the graph.</p>
     </td>
-    <td width="33%" valign="top">
-      <h3>🤖 AI-Assisted Developers</h3>
-      <p>Give your AI tools deep context about your project. Use <code>/understand-diff</code> before code review, <code>/understand-explain</code> to dive into any module, or <code>/understand-chat</code> to reason about architecture.</p>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>📊 Diff Impact Analysis</h3>
+      <p>See which parts of the system your changes affect before you commit. Understand ripple effects across the codebase.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>🎭 Persona-Adaptive UI</h3>
+      <p>The dashboard adjusts its detail level based on who you are — junior dev, PM, or power user.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>🏗️ Layer Visualization</h3>
+      <p>Automatic grouping by architectural layer — API, Service, Data, UI, Utility — with color-coded legend.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>📚 Language Concepts</h3>
+      <p>12 programming patterns (generics, closures, decorators, etc.) explained in context wherever they appear.</p>
     </td>
   </tr>
 </table>
@@ -190,67 +214,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Und
 
 ---
 
-## ✨ Features
-
-<p align="center">
-  <img src="assets/overview.png" alt="Dashboard Screenshot" width="800" />
-</p>
-
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🗺️ Interactive Knowledge Graph</h3>
-      <p>Files, functions, classes, and their relationships visualized with React Flow. Click any node to see its code and connections.</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>💬 Plain-English Summaries</h3>
-      <p>Every node described by an LLM so anyone — technical or not — can understand what it does and why it exists.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🧭 Guided Tours</h3>
-      <p>Auto-generated walkthroughs of the architecture, ordered by dependency. Learn the codebase in the right order.</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🔍 Fuzzy & Semantic Search</h3>
-      <p>Find anything by name or by meaning. Search "which parts handle auth?" and get relevant results across the graph.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>📊 Diff Impact Analysis</h3>
-      <p>See which parts of the system your changes affect before you commit. Understand ripple effects across the codebase.</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🎭 Persona-Adaptive UI</h3>
-      <p>The dashboard adjusts its detail level based on who you are — junior dev, PM, or power user.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🏗️ Layer Visualization</h3>
-      <p>Automatic grouping by architectural layer — API, Service, Data, UI, Utility — with color-coded legend.</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>📚 Language Concepts</h3>
-      <p>12 programming patterns (generics, closures, decorators, etc.) explained in context wherever they appear.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🏢 Business Domain Knowledge</h3>
-      <p>Extract business domains, flows, and process steps from your codebase. See how business logic maps to code with an interactive horizontal flow graph — domains contain flows, flows contain steps.</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🔀 Structural + Domain Views</h3>
-      <p>Toggle between the structural code graph and the business domain graph in the dashboard. Understand both how the code is organized and what business processes it implements.</p>
-    </td>
-  </tr>
-</table>
-
----
-
 ## 🔧 Under the Hood
 
 ### Multi-Agent Pipeline
@@ -267,35 +230,6 @@ The `/understand` command orchestrates 5 specialized agents, and `/understand-do
 | `domain-analyzer` | Extract business domains, flows, and process steps (used by `/understand-domain`) |
 
 File analyzers run in parallel (up to 5 concurrent, 20-30 files per batch). Supports incremental updates — only re-analyzes files that changed since the last run.
-
-### Project Structure
-
-```
-understand-anything-plugin/
-  .claude-plugin/  — Plugin manifest
-  agents/          — Specialized AI agents
-  skills/          — Skill definitions (/understand, /understand-chat, etc.)
-  src/             — TypeScript source (context-builder, diff-analyzer, etc.)
-  packages/
-    core/          — Analysis engine (types, persistence, tree-sitter, search, schema, tours)
-    dashboard/     — React + TypeScript web dashboard
-```
-
-### Tech Stack
-
-TypeScript, pnpm workspaces, React 18, Vite, TailwindCSS v4, React Flow, Zustand, web-tree-sitter, Fuse.js, Zod, Dagre
-
-### Development Commands
-
-| Command | Description |
-|---------|-------------|
-| `pnpm install` | Install all dependencies |
-| `pnpm --filter @understand-anything/core build` | Build the core package |
-| `pnpm --filter @understand-anything/core test` | Run core tests |
-| `pnpm --filter @understand-anything/skill build` | Build the plugin package |
-| `pnpm --filter @understand-anything/skill test` | Run plugin tests |
-| `pnpm --filter @understand-anything/dashboard build` | Build the dashboard |
-| `pnpm dev:dashboard` | Start dashboard dev server |
 
 ---
 
