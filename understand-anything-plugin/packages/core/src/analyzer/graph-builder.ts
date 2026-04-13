@@ -126,6 +126,7 @@ export class GraphBuilder {
   private readonly nodes: GraphNode[] = [];
   private readonly edges: GraphEdge[] = [];
   private readonly languages = new Set<string>();
+  private readonly nodeIds = new Set<string>();
   private readonly projectName: string;
   private readonly gitHash: string;
 
@@ -142,8 +143,10 @@ export class GraphBuilder {
 
     const name = filePath.split("/").pop() ?? filePath;
 
+    const id = `file:${filePath}`;
+    this.nodeIds.add(id);
     this.nodes.push({
-      id: `file:${filePath}`,
+      id,
       type: "file",
       name,
       filePath,
@@ -167,6 +170,7 @@ export class GraphBuilder {
     const fileId = `file:${filePath}`;
 
     // Create the file node
+    this.nodeIds.add(fileId);
     this.nodes.push({
       id: fileId,
       type: "file",
@@ -180,6 +184,7 @@ export class GraphBuilder {
     // Create function nodes with "contains" edges
     for (const fn of analysis.functions) {
       const funcId = `function:${filePath}:${fn.name}`;
+      this.nodeIds.add(funcId);
       this.nodes.push({
         id: funcId,
         type: "function",
@@ -203,6 +208,7 @@ export class GraphBuilder {
     // Create class nodes with "contains" edges
     for (const cls of analysis.classes) {
       const classId = `class:${filePath}:${cls.name}`;
+      this.nodeIds.add(classId);
       this.nodes.push({
         id: classId,
         type: "class",
@@ -253,8 +259,10 @@ export class GraphBuilder {
     const lang = detectLanguage(filePath);
     if (lang !== "unknown") this.languages.add(lang);
     const name = filePath.split("/").pop() ?? filePath;
+    const id = `${meta.nodeType ?? "file"}:${filePath}`;
+    this.nodeIds.add(id);
     this.nodes.push({
-      id: `${meta.nodeType ?? "file"}:${filePath}`,
+      id,
       type: meta.nodeType,
       name,
       filePath,
@@ -268,16 +276,14 @@ export class GraphBuilder {
     this.addNonCodeFile(filePath, meta);
     const fileId = `${meta.nodeType ?? "file"}:${filePath}`;
 
-    const existingIds = new Set(this.nodes.map(n => n.id));
-
     // Create child nodes for definitions (tables, schemas, etc.)
     for (const def of meta.definitions ?? []) {
       const childId = `${def.kind}:${filePath}:${def.name}`;
-      if (existingIds.has(childId)) {
+      if (this.nodeIds.has(childId)) {
         console.warn(`[GraphBuilder] Duplicate node ID "${childId}" — skipping`);
         continue;
       }
-      existingIds.add(childId);
+      this.nodeIds.add(childId);
       this.nodes.push({
         id: childId,
         type: this.mapKindToNodeType(def.kind),
@@ -294,11 +300,11 @@ export class GraphBuilder {
     // Create child nodes for services
     for (const svc of meta.services ?? []) {
       const childId = `service:${filePath}:${svc.name}`;
-      if (existingIds.has(childId)) {
+      if (this.nodeIds.has(childId)) {
         console.warn(`[GraphBuilder] Duplicate node ID "${childId}" — skipping`);
         continue;
       }
-      existingIds.add(childId);
+      this.nodeIds.add(childId);
       this.nodes.push({
         id: childId,
         type: "service",
@@ -314,11 +320,11 @@ export class GraphBuilder {
     // Create child nodes for endpoints
     for (const ep of meta.endpoints ?? []) {
       const childId = `endpoint:${filePath}:${ep.path}`;
-      if (existingIds.has(childId)) {
+      if (this.nodeIds.has(childId)) {
         console.warn(`[GraphBuilder] Duplicate node ID "${childId}" — skipping`);
         continue;
       }
-      existingIds.add(childId);
+      this.nodeIds.add(childId);
       this.nodes.push({
         id: childId,
         type: "endpoint",
@@ -335,11 +341,11 @@ export class GraphBuilder {
     // Create child nodes for steps (pipeline/makefile targets)
     for (const step of meta.steps ?? []) {
       const childId = `step:${filePath}:${step.name}`;
-      if (existingIds.has(childId)) {
+      if (this.nodeIds.has(childId)) {
         console.warn(`[GraphBuilder] Duplicate node ID "${childId}" — skipping`);
         continue;
       }
-      existingIds.add(childId);
+      this.nodeIds.add(childId);
       this.nodes.push({
         id: childId,
         type: "pipeline",
@@ -356,11 +362,11 @@ export class GraphBuilder {
     // Create child nodes for resources (Terraform, etc.)
     for (const res of meta.resources ?? []) {
       const childId = `resource:${filePath}:${res.name}`;
-      if (existingIds.has(childId)) {
+      if (this.nodeIds.has(childId)) {
         console.warn(`[GraphBuilder] Duplicate node ID "${childId}" — skipping`);
         continue;
       }
-      existingIds.add(childId);
+      this.nodeIds.add(childId);
       this.nodes.push({
         id: childId,
         type: "resource",
