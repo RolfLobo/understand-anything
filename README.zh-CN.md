@@ -51,6 +51,9 @@ Understand Anything 是一个基于 [Claude Code](https://docs.anthropic.com/en/
 
 ## ✨ 核心功能
 
+> [!NOTE]
+> **想直接体验？** 在我们的[主页](https://lum1104.github.io/Understand-Anything/)试试[在线演示](https://lum1104.github.io/Understand-Anything/) — 一个可以平移、缩放、搜索和探索的全交互式仪表盘。
+
 ### 探索代码结构图
 
 将你的代码库以交互式知识图谱的形式呈现——每个文件、函数和类都是可点击、可搜索、可探索的节点。选择任意节点即可查看通俗易懂的摘要、依赖关系和引导式学习路径。

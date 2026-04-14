@@ -51,6 +51,9 @@ Understand Anything es un plugin de [Claude Code](https://docs.anthropic.com/en/
 
 ## ✨ Características
 
+> [!NOTE]
+> **¿Quieres probarlo directamente?** Prueba la [demo en vivo](https://lum1104.github.io/Understand-Anything/) en nuestra [página principal](https://lum1104.github.io/Understand-Anything/) — un panel interactivo donde puedes navegar, hacer zoom, buscar y explorar directamente en tu navegador.
+
 ### Explora el grafo estructural
 
 Navega tu código como un grafo de conocimiento interactivo: cada archivo, función y clase es un nodo que puedes hacer clic, buscar y explorar. Selecciona cualquier nodo para ver resúmenes en lenguaje natural, relaciones y recorridos guiados.

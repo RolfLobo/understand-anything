@@ -52,6 +52,9 @@ Understand Anything is a [Claude Code](https://docs.anthropic.com/en/docs/claude
 
 ## ✨ Features
 
+> [!NOTE]
+> **Want to skip the reading?** Try the [live demo](https://lum1104.github.io/Understand-Anything/) in our [homepage](https://lum1104.github.io/Understand-Anything/) — a fully interactive dashboard you can pan, zoom, search, and explore right in your browser.
+
 ### Explore the structural graph
 
 Navigate your codebase as an interactive knowledge graph — every file, function, and class is a node you can click, search, and explore. Select any node to see plain-English summaries, relationships, and guided tours.

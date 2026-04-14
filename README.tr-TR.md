@@ -52,6 +52,9 @@ Understand Anything, projenizi çok-ajan hattıyla analiz eden, her dosya, fonks
 
 ## ✨ Özellikler
 
+> [!NOTE]
+> **Hemen denemek ister misiniz?** [Ana sayfamızda](https://lum1104.github.io/Understand-Anything/) [canlı demoyu](https://lum1104.github.io/Understand-Anything/) deneyin — doğrudan tarayıcınızda kaydırma, yakınlaştırma, arama ve keşfetme yapabileceğiniz tam etkileşimli bir kontrol paneli.
+
 ### Yapısal grafiği keşfedin
 
 Kod tabanınızı interaktif bir bilgi grafiği olarak görüntüleyin — her dosya, fonksiyon ve sınıf tıklanabilir, aranabilir ve keşfedilebilir bir düğümdür. Herhangi bir düğümü seçerek anlaşılır özetleri, bağımlılıkları ve rehberli turları görün.

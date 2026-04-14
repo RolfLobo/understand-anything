@@ -52,6 +52,9 @@ Understand Anything は [Claude Code](https://docs.anthropic.com/en/docs/claude-
 
 ## ✨ 機能
 
+> [!NOTE]
+> **すぐに試したいですか？** [ホームページ](https://lum1104.github.io/Understand-Anything/)で[ライブデモ](https://lum1104.github.io/Understand-Anything/)をお試しください — パン、ズーム、検索、探索ができる完全インタラクティブなダッシュボードです。
+
 ### コード構造グラフを探索
 
 コードベースをインタラクティブなナレッジグラフとして表示——すべてのファイル、関数、クラスがクリック・検索・探索可能なノードです。ノードを選択すると、わかりやすい要約、依存関係、ガイド付きツアーが表示されます。
