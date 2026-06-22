@@ -156,6 +156,7 @@ Determine whether to run a full analysis or incremental update.
     - Split on commas, trim whitespace from each pattern, and filter out empty entries.
     - Store the patterns as `$EXCLUDE_PATTERNS` (comma-joined for passing to downstream scripts: `"tests/*,docs/*"`).
     - These patterns take highest priority — they are applied on top of default patterns and `.understandignore` rules. Use `!` prefix to force-include files that would otherwise be excluded.
+    - **Note:** Newly added `--exclude` patterns require a `--full` scan to take effect.
 
 4. **Check for subdomain knowledge graphs to merge:**
    List all `*knowledge-graph*.json` files in `$PROJECT_ROOT/.understand-anything/` **excluding** `knowledge-graph.json` itself (e.g. `frontend-knowledge-graph.json`, `backend-knowledge-graph.json`). If any subdomain graphs exist, run the merge script bundled with this skill (located next to this SKILL.md file — use the skill directory path, not the project root):
