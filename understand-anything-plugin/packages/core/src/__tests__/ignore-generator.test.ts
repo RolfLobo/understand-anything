@@ -249,6 +249,15 @@ describe("generateStarterIgnoreFile", () => {
       expect(content).toContain("# **/*_test.rs");
     });
 
+    it("includes Rust criterion / test::Bencher file patterns", () => {
+      const content = generateStarterIgnoreFile(testDir);
+      // Defensive: most Cargo benches live under `benches/` (covered by
+      // the dir rule) but a small fraction of workspaces name benchmark
+      // files with these prefixes/suffixes outside that directory.
+      expect(content).toContain("# **/bench_*.rs");
+      expect(content).toContain("# **/*_bench.rs");
+    });
+
     it("groups patterns under the JS / TS sub-header", () => {
       const content = generateStarterIgnoreFile(testDir);
       expect(content).toContain("# JS / TS");

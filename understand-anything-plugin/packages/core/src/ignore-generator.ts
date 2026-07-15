@@ -125,6 +125,8 @@ const TEST_PATTERN_GROUPS: Array<{ label: string; patterns: string[] }> = [
       "**/tests.rs",
       "**/test_*.rs",
       "**/*_test.rs",
+      "**/bench_*.rs",
+      "**/*_bench.rs",
     ],
   },
 ];
