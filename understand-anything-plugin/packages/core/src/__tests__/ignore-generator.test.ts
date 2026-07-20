@@ -168,6 +168,12 @@ describe("generateStarterIgnoreFile", () => {
       const content = generateStarterIgnoreFile(testDir);
       expect(content).toContain("# benches/");
     });
+
+    it("suggests spec/ directories (RSpec convention)", () => {
+      mkdirSync(join(testDir, "spec"), { recursive: true });
+      const content = generateStarterIgnoreFile(testDir);
+      expect(content).toContain("# spec/");
+    });
   });
 
   describe("language-grouped test file patterns", () => {

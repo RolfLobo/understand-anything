@@ -35,6 +35,7 @@ const EXACT_DIR_NAMES = [
   "benchmark",
   "benchmarks",
   "benches",
+  "spec",
 ];
 
 // Directory-name suffixes matched case-insensitively via String.endsWith.
